@@ -1,7 +1,7 @@
 import { useProduct } from "../hooks/useProduct";
 import styles from "../styles/styles.module.css";
 import { createContext } from "react";
-import { ProductContextProps, ProductProps } from "../interfaces/interfaces";
+import { ProductContextProps, iProductProps } from "../interfaces/interfaces";
 
 export const ProductContext = createContext({} as ProductContextProps);
 const { Provider } = ProductContext;
@@ -9,7 +9,9 @@ const { Provider } = ProductContext;
 export const ProductCard = ({
     product: { id, title, img },
     children,
-}: ProductProps) => {
+    className,
+    style,
+}: iProductProps) => {
     const { counter, increaseBy } = useProduct();
 
     return (
@@ -20,11 +22,8 @@ export const ProductCard = ({
                 product: { id, title, img },
             }}
         >
-            <div className={styles.productCard}>
+            <div className={`${styles.productCard} ${className}`} style={style}>
                 {children}
-                {/* <ProductImage img={img} />
-            <ProductTitle title={title} />
-            <ProductButtons increaseBy={increaseBy} counter={counter} /> */}
             </div>
         </Provider>
     );
